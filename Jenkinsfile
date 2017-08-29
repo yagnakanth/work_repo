@@ -1,7 +1,7 @@
 pipeline {
   agent any
   stages {
-    stage('checkout') {
+    stage('code pull') {
       steps {
         echo 'Git checkout complete'
       }
