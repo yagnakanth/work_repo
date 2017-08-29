@@ -1,20 +1,25 @@
 pipeline {
   agent any
   stages {
-    stage('build') {
+    stage('checkout') {
       steps {
         echo 'a'
       }
     }
-    stage('code analyze') {
+    stage('build') {
+      steps {
+        echo 'b'
+      }
+    }
+    stage('test') {
       steps {
         parallel(
           "code analyze": {
-            echo 'b'
+            echo 'd'
             
           },
           "unit tests": {
-            echo 'c'
+            echo 'a'
             
           }
         )
@@ -22,17 +27,17 @@ pipeline {
     }
     stage('package') {
       steps {
-        echo 'd'
+        echo 'e'
       }
     }
-    stage('test') {
+    stage('regression test') {
       steps {
-        echo 'e'
+        echo 'f'
       }
     }
     stage('qa-deploy') {
       steps {
-        echo 'f'
+        echo 'yo'
       }
     }
   }
