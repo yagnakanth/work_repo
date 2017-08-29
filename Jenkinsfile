@@ -3,20 +3,7 @@ pipeline {
   stages {
     stage('build') {
       steps {
-        parallel(
-          "build dev": {
-            echo 'something'
-            
-          },
-          "build master": {
-            echo 'somehting'
-            
-          },
-          "build qa": {
-            echo 'something'
-            
-          }
-        )
+        echo 'something'
       }
     }
     stage('integrate') {
