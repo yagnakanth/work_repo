@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('checkout') {
       steps {
-        echo 'a'
+        echo 'Git checkout complete'
       }
     }
     stage('build') {
