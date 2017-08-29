@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div th:fragment="header">
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container-fluid">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        Welcome<span th:text="*{username != null}? ' '+*{username}+'!' : ' User!'"></span>
+
+        <div class="nav-collapse collapse">
+          <p class="navbar-text pull-right">
+          </p>
+          <ul class="nav">
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/showBasket}">Basket</a></li>
+            <li th:if="*{username != null}"><a th:href="@{/user/show(username=${username})}">View Profile</a></li>
+            <li th:if="*{username != null}"><a th:href="@{/logout}">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div th:fragment="footer">
+  <footer class="footer">
+    <p>&copy; ACME E-Commerce 2013</p>
+  </footer>
+</div>
+</body>
+</html>
