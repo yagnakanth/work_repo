@@ -12,10 +12,6 @@ pipeline {
             echo 'somehting'
             
           },
-          "merge master": {
-            echo 'something'
-            
-          },
           "build qa": {
             echo 'something'
             
