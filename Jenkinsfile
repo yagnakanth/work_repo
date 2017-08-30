@@ -21,7 +21,7 @@ pipeline {
                     echo "M2_HOME = ${M2_HOME}"
                     echo ${SONAR_RUNNER_HOME}
                 ''' 
-         sh 'mvn clean package'
+         sh 'mvn clean compile'
       }
     }
     stage('test') {
@@ -44,20 +44,26 @@ pipeline {
       steps {
         script{
         	withEnv(['JENKINS_NODE_COOKIE=dontKill']){
+        		
         		sh 'nohup mvn tomcat7:run-war &'
         		sh 'sleep 10'
         	}
         }
       }
     }
-    stage('regression test') {
+    stage('smoke test') {
       steps {
         sh 'mvn test'
       }
     }
     stage('qa-deploy') {
       steps {
-        echo 'yo'
+        sh 'mvn clean package'
+      }
+    }
+    stage('ui tests') {
+      steps {
+        sh 'mvn test'
       }
     }
   }
