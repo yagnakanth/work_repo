@@ -58,7 +58,8 @@ pipeline {
     }
     stage('qa-deploy') {
       steps {
-        sh 'mvn clean package'
+        
+        sh 'mvn package'
       }
     }
     stage('ui tests') {
