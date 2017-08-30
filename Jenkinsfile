@@ -17,7 +17,7 @@ pipeline {
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
                 ''' 
-         sh mvn clean
+         sh 'mvn clean'
       }
     }
     stage('test') {
