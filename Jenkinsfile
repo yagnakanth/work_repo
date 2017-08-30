@@ -27,8 +27,9 @@ pipeline {
         parallel(
           "code analyze": {
             tool name: 'Sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-    		sh "${sonarqubeScannerHome}/bin/sonar-runner -Dsonar.projectName=ecommerce -Dsonar.projectVersion=1.0 -Dsonar.projectKey=ecommerce -Dsonar.sources=."
-            
+            withSonarQubeEnv('Sonar') { // from SonarQube servers > name
+    		sh "${sonarHome}/bin/sonar-runner -Dsonar.projectName=ecommerce -Dsonar.projectVersion=1.0 -Dsonar.projectKey=ecommerce -Dsonar.sources=."
+            }
           },
           "unit tests": {
            sh 'mvn test'
