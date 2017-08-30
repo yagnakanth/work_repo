@@ -17,7 +17,7 @@ pipeline {
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
                 ''' 
-         sh 'mvn clean'
+         sh 'mvn clean package'
       }
     }
     stage('test') {
@@ -34,9 +34,9 @@ pipeline {
         )
       }
     }
-    stage('package') {
+    stage('dev-deploy') {
       steps {
-        echo 'e'
+        sh 'mvn tomcat7:run-war'
       }
     }
     stage('regression test') {
