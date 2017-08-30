@@ -2,8 +2,10 @@ pipeline {
   agent any
   tools { 
         maven 'maven' 
-        
+        sonar 'sonar'
     }
+  environment{
+  }
   stages {
     stage('code pull') {
       steps {
@@ -24,11 +26,11 @@ pipeline {
       steps {
         parallel(
           "code analyze": {
-            echo 'd'
+            sh "${sonar}/bin/sonar-runner -Dsonar.projectName=ecommerce -Dsonar.projectVersion=1.0 -Dsonar.projectKey=ecommerce -Dsonar.sources=."
             
           },
           "unit tests": {
-            echo 'a'
+           sh 'mvn test'
             
           }
         )
@@ -36,7 +38,7 @@ pipeline {
     }
     stage('dev-deploy') {
       steps {
-        sh 'mvn tomcat7:run-war'
+        sh 'mvn tomcat7:run-war &'
       }
     }
     stage('regression test') {
