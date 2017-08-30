@@ -2,11 +2,9 @@ pipeline {
   agent any
   tools { 
         maven 'maven' 
-        
+        tool name:'Sonar', type:'hudson.plugins.sonar.SonarRunnerInstallation'
     }
- environment{
- 	scannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
- }
+ 
   stages {
     stage('code pull') {
       steps {
@@ -19,6 +17,7 @@ pipeline {
          sh '''
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
+                    echo ${SONAR_HOME}
                 ''' 
          sh 'mvn clean package'
       }
