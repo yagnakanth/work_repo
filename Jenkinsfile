@@ -2,7 +2,7 @@ pipeline {
   agent any
   tools { 
         maven 'maven' 
-        tool name:'Sonar', type:'hudson.plugins.sonar.SonarRunnerInstallation'
+        hudson.plugins.sonar.SonarRunnerInstallation 'Sonar'
     }
  
   stages {
@@ -27,7 +27,7 @@ pipeline {
         parallel(
           "code analyze": {
             
-    		withSonarQubeEnv('sonar.installation') {
+    		withSonarQubeEnv('Sonar') {
             	sh "${scannerHome}/bin/sonar-runner -Dsonar.projectName=ecommerce -Dsonar.projectVersion=1.0 -Dsonar.projectKey=ecommerce -Dsonar.sources=."
             }
           },
