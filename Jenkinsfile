@@ -42,7 +42,7 @@ pipeline {
     }
     stage('dev-deploy') {
       steps {
-        sh "BUILD_ID=dontKillMe nohup mvn tomcat:run-war"
+        sh "BUILD_ID=dontKillMe nohup mvn tomcat7:run-war &"
       }
     }
     stage('regression test') {
