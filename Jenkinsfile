@@ -2,10 +2,9 @@ pipeline {
   agent any
   tools { 
         maven 'maven' 
-        sonar 'hudson.plugins.sonar.SonarRunnerInstallation'
+        hudson.plugins.sonar.SonarRunnerInstallation 'sonar'
     }
-  environment{
-  }
+  
   stages {
     stage('code pull') {
       steps {
@@ -26,8 +25,10 @@ pipeline {
       steps {
         parallel(
           "code analyze": {
-            sh "${sonar}/bin/sonar-runner -Dsonar.projectName=ecommerce -Dsonar.projectVersion=1.0 -Dsonar.projectKey=ecommerce -Dsonar.sources=."
-            
+            def scannerHome = tool 'sonar';
+    		withSonarQubeEnv('SonarQube 6.2') {
+            	sh "${scannerHome}/bin/sonar-runner -Dsonar.projectName=ecommerce -Dsonar.projectVersion=1.0 -Dsonar.projectKey=ecommerce -Dsonar.sources=."
+            }
           },
           "unit tests": {
            sh 'mvn test'
