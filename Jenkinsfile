@@ -42,7 +42,11 @@ pipeline {
     }
     stage('dev-deploy') {
       steps {
-        sh "BUILD_ID=dontKillMe nohup mvn tomcat7:run-war &"
+        script{
+        	withEnv(['JENKINS_NODE_COOKIE=dontKill']){
+        		sh 'nohup mvn tomcat7:run-war &'
+        	}
+        }
       }
     }
     stage('regression test') {
