@@ -4,7 +4,9 @@ pipeline {
         maven 'maven' 
         
     }
-  
+  environment{
+  	scannerHome = tool 'sonar'
+  }
   stages {
     stage('code pull') {
       steps {
@@ -25,7 +27,7 @@ pipeline {
       steps {
         parallel(
           "code analyze": {
-            def scannerHome = tool 'sonar';
+            
     		withSonarQubeEnv('SonarQube 6.2') {
             	sh "${scannerHome}/bin/sonar-runner -Dsonar.projectName=ecommerce -Dsonar.projectVersion=1.0 -Dsonar.projectKey=ecommerce -Dsonar.sources=."
             }
