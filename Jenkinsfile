@@ -4,7 +4,9 @@ pipeline {
         maven 'maven' 
         
     }
- 
+  triggers{
+  	pollSCM '* * * * *'
+  }
   stages {
     stage('code pull') {
       steps {
