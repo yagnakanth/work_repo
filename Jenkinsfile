@@ -4,9 +4,7 @@ pipeline {
         maven 'maven' 
         
     }
-  environment{
-  	scannerHome = tool 'sonar'
-  }
+  
   stages {
     stage('code pull') {
       steps {
@@ -27,9 +25,10 @@ pipeline {
       steps {
         parallel(
           "code analyze": {
-            
-    		sh "${scannerHome}/bin/sonar-runner -Dsonar.projectName=ecommerce -Dsonar.projectVersion=1.0 -Dsonar.projectKey=ecommerce -Dsonar.sources=."
-           
+            def scannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+    		withSonarQubeEnv('sonar.installation') {
+            	sh "${scannerHome}/bin/sonar-runner -Dsonar.projectName=ecommerce -Dsonar.projectVersion=1.0 -Dsonar.projectKey=ecommerce -Dsonar.sources=."
+            }
           },
           "unit tests": {
            sh 'mvn test'
