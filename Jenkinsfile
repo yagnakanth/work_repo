@@ -17,7 +17,7 @@ pipeline {
          sh '''
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
-                    echo ${SONAR_HOME}
+                    echo ${SONAR_RUNNER_HOME}
                 ''' 
          sh 'mvn clean package'
       }
@@ -26,7 +26,7 @@ pipeline {
       steps {
         parallel(
           "code analyze": {
-            def sonarHome = tool name: 'Sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+            tool name: 'Sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
             withSonarQubeEnv('Sonar') { // from SonarQube servers > name
     		sh "${sonarHome}/bin/sonar-runner -Dsonar.projectName=ecommerce -Dsonar.projectVersion=1.0 -Dsonar.projectKey=ecommerce -Dsonar.sources=."
             }
