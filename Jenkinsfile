@@ -42,7 +42,7 @@ pipeline {
     }
     stage('dev-deploy') {
       steps {
-        sh 'mvn tomcat7:run-war &'
+        sh 'mvn clean tomcat7:run-war &'
       }
     }
     stage('regression test') {
