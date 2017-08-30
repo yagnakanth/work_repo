@@ -1,5 +1,9 @@
 pipeline {
   agent any
+  tools { 
+        maven 'Maven 3.3.9' 
+        jdk 'jdk8' 
+    }
   stages {
     stage('code pull') {
       steps {
@@ -9,7 +13,10 @@ pipeline {
     }
     stage('build') {
       steps {
-        echo 'b'
+         sh '''
+                    echo "PATH = ${PATH}"
+                    echo "M2_HOME = ${M2_HOME}"
+                ''' 
       }
     }
     stage('test') {
