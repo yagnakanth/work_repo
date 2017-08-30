@@ -28,9 +28,8 @@ pipeline {
         parallel(
           "code analyze": {
             
-    		withSonarQubeEnv('SonarQube 6.2') {
-            	sh "${scannerHome}/bin/sonar-runner -Dsonar.projectName=ecommerce -Dsonar.projectVersion=1.0 -Dsonar.projectKey=ecommerce -Dsonar.sources=."
-            }
+    		sh "${scannerHome}/bin/sonar-runner -Dsonar.projectName=ecommerce -Dsonar.projectVersion=1.0 -Dsonar.projectKey=ecommerce -Dsonar.sources=."
+           
           },
           "unit tests": {
            sh 'mvn test'
