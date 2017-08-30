@@ -2,9 +2,11 @@ pipeline {
   agent any
   tools { 
         maven 'maven' 
-        def scannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+        
     }
-  
+  environment{
+  def scannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+  }
   stages {
     stage('code pull') {
       steps {
