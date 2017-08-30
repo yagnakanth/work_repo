@@ -47,7 +47,7 @@ pipeline {
     }
     stage('regression test') {
       steps {
-        echo 'f'
+        sh 'mvn test'
       }
     }
     stage('qa-deploy') {
