@@ -26,7 +26,7 @@ pipeline {
       steps {
         parallel(
           "code analyze": {
-            tool name: 'SonarQubeScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+            tool name: 'Sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
     		sh "${sonarqubeScannerHome}/bin/sonar-runner -Dsonar.projectName=ecommerce -Dsonar.projectVersion=1.0 -Dsonar.projectKey=ecommerce -Dsonar.sources=."
             
           },
