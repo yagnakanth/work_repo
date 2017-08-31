@@ -16,6 +16,11 @@ pipeline {
     }
     stage('build') {
       steps {
+         slackSend channel: '#jenkins',
+				color: 'good',
+				message: "Build started",
+				baseUrl: "https://qentelli.slack.com/services/hooks/jenkins-ci/",
+				token:"HFi8BU1ac67whUX4kc9Ka1Z7"
          sh '''
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
@@ -78,6 +83,11 @@ pipeline {
   }
   post{
   	always{
+  		slackSend channel: '#jenkins',
+				color: 'good',
+				message: "The pipeline completed successfully.",
+				baseUrl: "https://qentelli.slack.com/services/hooks/jenkins-ci/",
+				token:"HFi8BU1ac67whUX4kc9Ka1Z7"
   		step([$class: 'CucumberReportPublisher', fileExcludePattern: '', fileIncludePattern: '*.json', ignoreFailedTests: false, jenkinsBasePath: '', jsonReportDirectory: 'ecommerce-uitests/target/', missingFails: false, parallelTesting: false, pendingFails: false, skippedFails: false, undefinedFails: false])
   	}
   }
