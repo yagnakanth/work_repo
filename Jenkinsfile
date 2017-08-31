@@ -94,7 +94,16 @@ pipeline {
       keepAll: true,
       reportDir: 'ecommerce-smoke-uitests/target/cucumber-html-reports',
       reportFiles: 'overview-features.html',
-      reportName: "Cucumber Report"
+      reportName: "Smoke Test Report"
+    ])
+    
+    publishHTML (target: [
+      allowMissing: false,
+      alwaysLinkToLastBuild: false,
+      keepAll: true,
+      reportDir: 'ecommerce-uitests/target/cucumber-html-reports',
+      reportFiles: 'overview-features.html',
+      reportName: "Regression Test Report"
     ])
   	}
   }
