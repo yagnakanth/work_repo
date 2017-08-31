@@ -18,7 +18,7 @@ pipeline {
       steps {
          slackSend channel: '#jenkins',
 				color: 'good',
-				message: "Build started",
+				message: "Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)",
 				baseUrl: "https://qentelli.slack.com/services/hooks/jenkins-ci/",
 				token:"HFi8BU1ac67whUX4kc9Ka1Z7"
          sh '''
@@ -88,7 +88,7 @@ pipeline {
 				message: "The pipeline completed successfully.",
 				baseUrl: "https://qentelli.slack.com/services/hooks/jenkins-ci/",
 				token:"HFi8BU1ac67whUX4kc9Ka1Z7"
-  		step([$class: 'CucumberReportPublisher', fileExcludePattern: '', fileIncludePattern: '*.json', ignoreFailedTests: false, jenkinsBasePath: '', jsonReportDirectory: 'ecommerce-uitests/target/', missingFails: false, parallelTesting: false, pendingFails: false, skippedFails: false, undefinedFails: false])
+  		step([$class: 'CucumberReportPublisher', fileExcludePattern: '', fileIncludePattern: '*.json', ignoreFailedTests: false, jenkinsBasePath: '', jsonReportDirectory: 'ecommerce-smoke-uitests/target/', missingFails: false, parallelTesting: false, pendingFails: false, skippedFails: false, undefinedFails: false])
   	}
   }
 }
