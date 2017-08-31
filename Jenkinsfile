@@ -78,8 +78,8 @@ pipeline {
   }
   post{
   	always{
-  		step([$class: 'CucumberReportPublisher', jsonReportDirectory: 'ecommerce-smoke-uitests/target', fileIncludePattern: 'cucumber.json'])
-  		step([$class: 'CucumberReportPublisher', jsonReportDirectory: 'ecommerce-uitests/target', fileIncludePattern: 'cucumber.json'])
+  		cucumber(fileIncludePattern: 'cucumber.json', jsonReportDirectory: 'ecommerce-uitests/target/')
+  		cucumber(fileIncludePattern: 'cucumber.json', jsonReportDirectory: 'ecommerce-uitests/target/')
   	}
   }
 }
