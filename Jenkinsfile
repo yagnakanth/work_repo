@@ -78,8 +78,7 @@ pipeline {
   }
   post{
   	always{
-  		cucumber(fileIncludePattern: 'cucumber.json', jsonReportDirectory: 'ecommerce-uitests/target/')
-  		cucumber(fileIncludePattern: 'cucumber.json', jsonReportDirectory: 'ecommerce-uitests/target/')
+  		step([$class: 'CucumberReportPublisher', fileExcludePattern: '', fileIncludePattern: '*.json', ignoreFailedTests: false, jenkinsBasePath: '', jsonReportDirectory: 'ecommerce-uitests/target/', missingFails: false, parallelTesting: false, pendingFails: false, skippedFails: false, undefinedFails: false])
   	}
   }
 }
