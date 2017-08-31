@@ -25,6 +25,7 @@ pipeline{
 				echo 'blah'
 			}
 			
+			aaa
 		}
 		stage('staging deploy'){
 			steps{
