@@ -85,7 +85,7 @@ pipeline {
   	always{
   		slackSend channel: '#jenkins',
 				color: 'good',
-				message: "The pipeline completed successfully.",
+				message: "The pipeline completed ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)",
 				baseUrl: "https://qentelli.slack.com/services/hooks/jenkins-ci/",
 				token:"HFi8BU1ac67whUX4kc9Ka1Z7"
   	 publishHTML (target: [
