@@ -54,6 +54,7 @@ pipeline {
     stage('smoke test') {
       steps {
         sh 'git clone https://github.com/vishnunc/ecommerce-uitests.git'
+        sh 'cd ecommerce-uitests'
         sh './gradlew cucumber src/test/resources/gradle/cucumber/smoke'
       }
     }
