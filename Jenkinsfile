@@ -61,7 +61,7 @@ pipeline {
         sh 'rm -rf ecommerce-smoke-uitests'
         sh 'git clone https://github.com/vishnunc/ecommerce-uitests.git ecommerce-smoke-uitests'
         sh 'cd ecommerce-smoke-uitests && ./gradlew cucumber -Pfeatures=src/test/resources/gradle/cucumber/smoke'
-        step([$class: 'CucumberReportPublisher', jsonReportDirectory: 'target', fileIncludePattern: 'cucumber.json'])
+        
       }
     }
     stage('qa-deploy') {
@@ -76,7 +76,7 @@ pipeline {
         sh 'git clone https://github.com/vishnunc/ecommerce-uitests.git'
        
         sh 'cd ecommerce-uitests && ./gradlew cucumber -Pfeatures=src/test/resources/gradle/cucumber'
-        step([$class: 'CucumberReportPublisher', jsonReportDirectory: 'target', fileIncludePattern: 'cucumber.json'])
+        
       }
     }
  
@@ -88,7 +88,14 @@ pipeline {
 				message: "The pipeline completed successfully.",
 				baseUrl: "https://qentelli.slack.com/services/hooks/jenkins-ci/",
 				token:"HFi8BU1ac67whUX4kc9Ka1Z7"
-  		step([$class: 'CucumberReportPublisher', fileExcludePattern: '', fileIncludePattern: '*.json', ignoreFailedTests: false, jenkinsBasePath: '', jsonReportDirectory: 'ecommerce-smoke-uitests/target/', missingFails: false, parallelTesting: false, pendingFails: false, skippedFails: false, undefinedFails: false])
+  	 publishHTML (target: [
+      allowMissing: false,
+      alwaysLinkToLastBuild: false,
+      keepAll: true,
+      reportDir: 'ecommerce-smoke-uitests/target/cucumber-html-reports',
+      reportFiles: 'overview-features.html',
+      reportName: "Cucumber Report"
+    ])
   	}
   }
 }
