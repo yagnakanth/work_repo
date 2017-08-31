@@ -55,7 +55,7 @@ pipeline {
       steps {
         sh 'rm -rf ecommerce-smoke-uitests'
         sh 'git clone https://github.com/vishnunc/ecommerce-uitests.git ecommerce-smoke-uitests'
-        sh 'ecommerce-smoke-uitests/gradlew cucumber ecommerce-smoke-uitests/src/test/resources/gradle/cucumber/smoke'
+        sh 'cd ecommerce-smoke-uitests && ./gradlew cucumber src/test/resources/gradle/cucumber/smoke'
         step([$class: 'CucumberReportPublisher', jsonReportDirectory: 'target', fileIncludePattern: 'cucumber.json'])
       }
     }
@@ -70,7 +70,7 @@ pipeline {
         sh 'rm -rf ecommerce-uitests'
         sh 'git clone https://github.com/vishnunc/ecommerce-uitests.git'
        
-        sh 'ecommerce-uitests/gradlew cucumber ecommerce-uitests/src/test/resources/gradle/cucumber'
+        sh 'cd ecommerce-uitests && ./gradlew cucumber src/test/resources/gradle/cucumber'
         step([$class: 'CucumberReportPublisher', jsonReportDirectory: 'target', fileIncludePattern: 'cucumber.json'])
       }
     }
