@@ -53,8 +53,8 @@ pipeline {
     }
     stage('smoke test') {
       steps {
-        sh 'rm -rf ecommerce-uitests || git clone https://github.com/vishnunc/ecommerce-uitests.git'
-        sh 'cd ecommerce-uitests'
+        sh 'rm -rf ecommerce-smoke-uitests | git clone https://github.com/vishnunc/ecommerce-uitests.git ecommerce-smoke-uitests'
+        sh 'cd ecommerce-smoke-uitests'
         sh './gradlew cucumber src/test/resources/gradle/cucumber/smoke'
       }
     }
@@ -66,7 +66,9 @@ pipeline {
     }
     stage('ui tests') {
       steps {
-        sh 'mvn test'
+        sh 'rm -rf ecommerce-uitests | git clone https://github.com/vishnunc/ecommerce-uitests.git'
+        sh 'cd ecommerce-uitests'
+        sh './gradlew cucumber src/test/resources/gradle/cucumber'
       }
     }
   }
