@@ -53,8 +53,8 @@ pipeline {
     }
     stage('smoke test') {
       steps {
-        sh 'rm -rf ecommerce-smoke-uitests | git clone https://github.com/vishnunc/ecommerce-uitests.git ecommerce-smoke-uitests'
-        
+        sh 'rm -rf ecommerce-smoke-uitests'
+        sh 'git clone https://github.com/vishnunc/ecommerce-uitests.git ecommerce-smoke-uitests'
         sh 'cd ecommerce-smoke-uitests | ./gradlew cucumber src/test/resources/gradle/cucumber/smoke'
         step([$class: 'CucumberReportPublisher', jsonReportDirectory: 'target', fileIncludePattern: 'cucumber.json'])
       }
@@ -67,7 +67,8 @@ pipeline {
     }
     stage('ui tests') {
       steps {
-        sh 'rm -rf ecommerce-uitests | git clone https://github.com/vishnunc/ecommerce-uitests.git'
+        sh 'rm -rf ecommerce-uitests'
+        sh 'git clone https://github.com/vishnunc/ecommerce-uitests.git'
        
         sh 'cd ecommerce-uitests | ./gradlew cucumber src/test/resources/gradle/cucumber'
         step([$class: 'CucumberReportPublisher', jsonReportDirectory: 'target', fileIncludePattern: 'cucumber.json'])
