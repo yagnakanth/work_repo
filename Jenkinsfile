@@ -60,7 +60,7 @@ pipeline {
       steps {
         sh 'rm -rf ecommerce-smoke-uitests'
         sh 'git clone https://github.com/vishnunc/ecommerce-uitests.git ecommerce-smoke-uitests'
-        sh 'cd ecommerce-smoke-uitests && ./gradlew cucumber -Pfeatures=src/test/resources/gradle/cucumber/smoke'
+        sh 'cd ecommerce-smoke-uitests && ./gradlew cucumber -Pfeatures=src/test/resources/gradle/cucumber/smoke report --continue'
         
       }
     }
@@ -75,7 +75,7 @@ pipeline {
         sh 'rm -rf ecommerce-uitests'
         sh 'git clone https://github.com/vishnunc/ecommerce-uitests.git'
        
-        sh 'cd ecommerce-uitests && ./gradlew cucumber -Pfeatures=src/test/resources/gradle/cucumber'
+        sh 'cd ecommerce-uitests && ./gradlew cucumber -Pfeatures=src/test/resources/gradle/cucumber report --continue'
         
       }
     }
