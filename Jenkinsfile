@@ -53,7 +53,8 @@ pipeline {
     }
     stage('smoke test') {
       steps {
-        sh 'mvn test'
+        sh 'git clone https://github.com/vishnunc/ecommerce-uitests.git'
+        sh './gradlew cucumber src/test/resources/gradle/cucumber/smoke'
       }
     }
     stage('qa-deploy') {
