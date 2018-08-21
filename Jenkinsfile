@@ -16,11 +16,11 @@ pipeline {
     }
     stage('build') {
       steps {
-         slackSend channel: '#jenkins-notifications',
+         /* slackSend channel: '#jenkins-notifications',
 				color: 'good',
 				message: "Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)",
 				baseUrl: "https://qentelli.slack.com/services/hooks/jenkins-ci/",
-				token:"HFi8BU1ac67whUX4kc9Ka1Z7"
+				token:"HFi8BU1ac67whUX4kc9Ka1Z7" */
          sh '''
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
