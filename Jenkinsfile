@@ -16,7 +16,7 @@ pipeline {
     }
     stage('build') {
       steps {
-         slackSend channel: '#jenkins',
+         slackSend channel: '#jenkins-notifications',
 				color: 'good',
 				message: "Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)",
 				baseUrl: "https://qentelli.slack.com/services/hooks/jenkins-ci/",
