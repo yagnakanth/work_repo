@@ -6,7 +6,7 @@
   <groupId>za.co.scrinium</groupId>
   <artifactId>ecommerce</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <packaging>jarr</packaging>
+  <packaging>war</packaging>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
